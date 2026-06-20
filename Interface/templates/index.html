@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AHP</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>AHP</h1>
+    </div>
+    <label class="file-button">
+      Carregar .py
+      <input id="fileInput" type="file" accept=".py" multiple>
+    </label>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <label for="tableSelect">Tabela</label>
+      <select id="tableSelect"></select>
+
+      <div class="status" id="loadStatus">Carregando tabelas...</div>
+
+      <hr>
+
+      <h2>Editar peso</h2>
+
+      <label for="rowSelect">Qual a Relevância de:</label>
+      <select id="rowSelect"></select>
+
+      <label for="colSelect">Para:</label>
+      <select id="colSelect"></select>
+
+      <label>Peso Saaty</label>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:12px; color:#174a9c; min-width:28px; text-align:right" id="weightSide">←</span>
+        <input  type="range" id="weightSelect" min="0" max="16" step="1" value="8" style="flex:1"> 
+        <span style="font-size:12px; color:#174a9c; min-width:28px;" id="weightSide2">→</span>
+      </div>
+      <div style="text-align:center; font-size:18px; font-weight:500;" id="weightDisplay">1</div>
+      <div style="margin-left:20px;display:flex; justify-content:space-between; font-size:11px; color:var(--color-text-secondary); margin-top:2px;">
+        <span> ← extremamente importante</span>
+      <span>extremamente importante →</span>
+    </div> <br>
+      <button id="applyButton" type="button">Aplicar peso</button>
+
+      <button id="downloadButton" onclick="downloadAhpyScript()">
+  ⬇ Baixar script ahpy
+</button>
+  
+      
+    </section>
+
+    <section class="panel matrix-panel">
+      <div class="section-header">
+        <h2>Matriz</h2>
+        <span id="tableInfo"></span>
+      </div>
+      <div id="matrixWrap" class="matrix-wrap"></div>
+    </section>
+
+    <section class="panel results">
+      <div class="section-header">
+        <h2>Resultados</h2>
+        <strong id="crValue">CR: -</strong>
+      </div>
+      <div id="weightsList" class="weights-list"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
